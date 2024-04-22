@@ -71,7 +71,7 @@
             <section class="chats-history">
                 <ul>
                     <!-- ?CARD -->
-                    <li class="card flex" v-for="contact in contacts">
+                    <li class="card flex" v-for="(contact, index) in contacts" @click="activeIndex = index">
                     <div class="card-img"><img :src="`./img/avatar${contact.avatar}.jpg`" alt="contact.name"></div>
                     <div class="card-name ">
                         <h4>{{ contact.name }}</h4>
@@ -115,11 +115,11 @@
             <!-- /CONTACT DETAILS -->
 
             <!-- *LAST MESSAGES -->
-            <section class="messages flex">
+            <section v-for="(contact, index) in contacts" class="messages flex" v-show="index === activeIndex">
                 <!-- ?message sent -->
-                <div class="sent">
+                <div v-for="message in contact.messages" :class="message.status">
                     <div class="flex">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
+                        <p> {{ message.message }} </p>
                         <!-- ?chev dropdown -->
                         <div class="chev">
                             <label for="options">
@@ -140,11 +140,11 @@
                     </div>
                 </div>
                 <!-- ?message received -->
-                <div class="received">
+                <!-- <div class="received">
                     <div class="flex">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p> -->
                         <!-- ?chev dropdown -->
-                        <div class="chev">
+                        <!-- <div class="chev">
                             <label for="options">
                                 <i class="fa-solid fa-chevron-down" id="options"></i>
                                 <ul class="chev-list">
@@ -161,99 +161,7 @@
                     <div class="message-time opacity05">
                         16.15
                     </div>
-                </div>
-                <!-- ?message sent -->
-                <div class="sent">
-                    <div class="flex">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
-                        <!-- ?chev dropdown -->
-                        <div class="chev">
-                            <label for="options">
-                                <i class="fa-solid fa-chevron-down" id="options"></i>
-                                <ul class="chev-list">
-                                    <li>
-                                        <button>Info messaggio</button>
-                                    </li>
-                                    <li>
-                                        <button>Cancella messaggio</button>
-                                    </li>
-                                </ul>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="message-time opacity05">
-                        16.13
-                    </div>
-                </div>
-                <!-- ?message received -->
-                <div class="received">
-                    <div class="flex">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
-                        <!-- ?chev dropdown -->
-                        <div class="chev">
-                            <label for="options">
-                                <i class="fa-solid fa-chevron-down" id="options"></i>
-                                <ul class="chev-list">
-                                    <li>
-                                        <button>Info messaggio</button>
-                                    </li>
-                                    <li>
-                                        <button>Cancella messaggio</button>
-                                    </li>
-                                </ul>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="message-time opacity05">
-                        16.15
-                    </div>
-                </div>
-                <!-- ?message sent -->
-                <div class="sent">
-                    <div class="flex">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
-                        <!-- ?chev dropdown -->
-                        <div class="chev">
-                            <label for="options">
-                                <i class="fa-solid fa-chevron-down" id="options"></i>
-                                <ul class="chev-list">
-                                    <li>
-                                        <button>Info messaggio</button>
-                                    </li>
-                                    <li>
-                                        <button>Cancella messaggio</button>
-                                    </li>
-                                </ul>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="message-time opacity05">
-                        16.13
-                    </div>
-                </div>
-                <!-- ?message received -->
-                <div class="received">
-                    <div class="flex">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
-                        <!-- ?chev dropdown -->
-                        <div class="chev">
-                            <label for="options">
-                                <i class="fa-solid fa-chevron-down" id="options"></i>
-                                <ul class="chev-list">
-                                    <li>
-                                        <button>Info messaggio</button>
-                                    </li>
-                                    <li>
-                                        <button>Cancella messaggio</button>
-                                    </li>
-                                </ul>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="message-time opacity05">
-                        16.15
-                    </div>
-                </div>
+                </div> -->
             </section>
             <!-- /LAST MESSAGES -->
 

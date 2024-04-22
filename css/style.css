@@ -237,7 +237,9 @@ main header div:first-child {
 }
 
 .sent {
+    width: fit-content;
     max-width: 60%;
+    min-width: 20%;
     margin: 10px;
     padding: var(--ten-padding);
     align-self: flex-end;
@@ -278,7 +280,9 @@ label {
 }
 
 .received {
+    width: fit-content;
     max-width: 60%;
+    min-width: 20%;
     margin: 10px;
     padding: var(--ten-padding);
     background-color: #FFFFFF;
@@ -288,6 +292,10 @@ label {
 .message-time {
     text-align: right;
     font-size: .4rem;
+}
+
+section.messages .flex {
+    justify-content: space-between;
 }
 
 /* *INPUT SECTION */
