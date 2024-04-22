@@ -1,128 +1,277 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/tablet.css" media="screen and (max-width: 991px)">
-    <link rel="stylesheet" href="assets/css/mobile.css" media="screen and (max-width: 540px)">
-    <title>Boolzapp</title>
-    <!-- Vue -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoolzApp</title>
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- style -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- media queries -->
+    <link rel="stylesheet" href="./css/media-queries.css">
+
+    <!-- vue -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
 </head>
 <body>
-    <div id="app" class="container">
-        <!-- contenitore sx -->
-        <div class="left">
-            <div class="header-left">
-                <div class="header-left-logo">
-                    <img src="assets/img/avatar_io.jpg" alt="Mio avatar">
+    <div class="container flex" id="app">
+        <!-- !CONTACTS COL -->
+        <nav>
+
+            <!-- *HEADER -->
+            <header class="flex s-between">
+                <!-- ?img -->
+                <div class="img-round">
+                    <img src="./img/avatar_io.jpg" alt="">
                 </div>
-                <div class="header-left-icons">
-                    <i class="fas fa-circle-notch"></i>
-                    <i class="fas fa-comment-alt"></i>
-                    <i class="fas fa-ellipsis-v"></i>
+                <!-- ?icons -->
+                <ul class="nav-header-icons flex c-g">
+                    <li>
+                        <button><i class="fa-solid fa-circle-notch"></i></button>
+                    </li>
+                    <li>
+                        <button><i class="fa-solid fa-message"></i></button>
+                    </li>
+                    <li>
+                        <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </li> 
+                </ul>
+            </header>
+            <!-- /HEADER -->
+
+            <!-- *NOTIFICATION SECTION -->
+            <section class="notification flex">
+                <div class="bell-icon flex">
+                    <i class="fa-solid fa-bell-slash"></i>
                 </div>
-            </div>
-            <div class="left-disclaimer">
-                <div class="left-disclaimer-logo">
-                    <i class="fa fa-bell-slash" aria-hidden="true"></i>
-                </div>
-                <div class="left-disclaimer-text">
+                <div class="notification-text flex">
                     <h3>Ricevi notifiche di nuovi messaggi</h3>
-                    <a href="#">Attiva notifiche desktop</a>
+                    <a href="" class="c-g">Attiva notifiche desktop</a>
                 </div>
-            </div>
-            <div class="left-searchbar">
-                <label class="search-label" for="search">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+            </section>
+            <!-- /NOTIFICATION SECTION -->
+
+            <!-- *RESEARCH SECTION -->
+            <section class="research flex">
+                <label for="new-chat" class="research-icon c-g flex">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </label>
-                <input id="contacts-filter" class="left-searchbar-input" placeholder="Cerca o inizia una nuova chat"
-                    name="search">
-            </div>
-            <div class="contacts">
-                <div class="contact" v-for="person in contacts">
-                    <div class="contact-logo">
-                        <img :src="`assets/img/avatar_${person.num}.jpg`" :alt="person.description">
+                <div class="search-input">
+                    <input id="new-chat" type="text" placeholder="Cerca o inizia una nuova chat" aria-label="search or start new chat">
+                </div>
+            </section>
+            <!-- /RESEARCH SECTION -->
+
+            <!-- *RECENT CHATS -->
+            <section class="chats-history">
+                <ul>
+                    <!-- ?CARD -->
+                    <li class="card flex" v-for="contact in contacts">
+                    <div class="card-img"><img :src="`./img/avatar${contact.avatar}.jpg`" alt="contact.name"></div>
+                    <div class="card-name ">
+                        <h4>{{ contact.name }}</h4>
+                        <p class="c-g">Lorem ipsum dolor sit amet</p>
                     </div>
-                    <div class="contact-info">
-                        <h3>
-                            <span class="contact-name"> {{ person.name }} </span>
-                            <span class="time">16:15</span>
-                        </h3>
-                        <small>Lorem ipsum dolor sit amet</small>
-                    </div>
+                    <div class="card-time c-g">16:15</div>
+                    </li>
+                </ul>               
+            </section>
+            <!-- /RECENT CHATS -->
+
+        </nav>
+        <!-- /CONTACTS COL -->
+
+        <!-- !CHAT COL -->
+        <main>
+
+            <!-- *CONTACT DETAILS -->
+            <header class="flex">
+                <!-- ?info -->
+                <div>
+                    <img src="./img/avatar_1.jpg" alt="">
                 </div>
-            </div>
-        </div>
-        <!-- /contenitore sx -->
-        <!-- contenitore dx -->
-        <div class="right">
-            <div class="header-right">
-                <div class="header-right-logo">
-                    <img src="assets/img/avatar_1.jpg" alt="">
-                    <h3><span id="header-right-contact-name">Michele</span> <br>
-                        <small class="time">Ultimo accesso oggi alle 16:26</small>
-                    </h3>
+                <div class="main-chat-name">
+                    <h4>Michele</h4>
+                    <p>Ultimo accesso oggi alle 16:26</p>
                 </div>
-                <div class="header-right-icons">
-                    <i class="fas fa-search"></i>
-                    <i class="fas fa-paperclip"></i>
-                    <i class="fas fa-ellipsis-v"></i>
-                </div>
-            </div>
-            <div class="right-messages-container">
-                <div class="right-messages">
-                    <div class="message sent">
-                        <div class="message-inner">
-                            <span class="message-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat eos blanditiis architecto expedita aspernatur quasi, et nobis aut officiis soluta voluptates nesciunt voluptate ipsa fuga rerum doloribus, unde laboriosam doloremque?
-                            </span>
-                            <div class="message-options">
-                                <i class="fa fa-chevron-down"></i>
-                                <div class="message-options-panel">
-                                    <div class="message-info">Info messaggio</div>
-                                    <div class="message-destroy">Cancella messaggio</div>
-                                </div>
-                            </div>
+                <!-- ?buttons -->
+                <ul class="main-header-icons c-g flex">
+                    <li>
+                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </li>
+                    <li>
+                        <button><i class="fa-solid fa-paperclip"></i></button>
+                    </li>
+                    <li>
+                        <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                    </li>
+                </ul>
+            </header>
+            <!-- /CONTACT DETAILS -->
+
+            <!-- *LAST MESSAGES -->
+            <section class="messages flex">
+                <!-- ?message sent -->
+                <div class="sent">
+                    <div class="flex">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
+                        <!-- ?chev dropdown -->
+                        <div class="chev">
+                            <label for="options">
+                                <i class="fa-solid fa-chevron-down" id="options"></i>
+                                <ul class="chev-list">
+                                    <li>
+                                        <button>Info messaggio</button>
+                                    </li>
+                                    <li>
+                                        <button>Cancella messaggio</button>
+                                    </li>
+                                </ul>
+                            </label>
                         </div>
-                        <span class="message-time">16:13</span>
                     </div>
-                    <div class="message received">
-                        <div class="message-inner">
-                            <span class="message-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat eos blanditiis architecto expedita
-                                aspernatur quasi, et nobis aut officiis soluta voluptates nesciunt voluptate ipsa fuga rerum doloribus, unde
-                                laboriosam doloremque?
-                            </span>
-                            <div class="message-options">
-                                <i class="fa fa-chevron-down"></i>
-                                <div class="message-options-panel">
-                                    <div class="message-info">Info messaggio</div>
-                                    <div class="message-destroy">Cancella messaggio</div>
-                                </div>
-                            </div>
+                    <div class="message-time opacity05">
+                        16.13
+                    </div>
+                </div>
+                <!-- ?message received -->
+                <div class="received">
+                    <div class="flex">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
+                        <!-- ?chev dropdown -->
+                        <div class="chev">
+                            <label for="options">
+                                <i class="fa-solid fa-chevron-down" id="options"></i>
+                                <ul class="chev-list">
+                                    <li>
+                                        <button>Info messaggio</button>
+                                    </li>
+                                    <li>
+                                        <button>Cancella messaggio</button>
+                                    </li>
+                                </ul>
+                            </label>
                         </div>
-                        <span class="message-time">16:15</span>
+                    </div>
+                    <div class="message-time opacity05">
+                        16.15
                     </div>
                 </div>
-            </div>
-            <div class="right-footer">
-                <div class="right-footer-icon">
-                    <i class="far fa-smile"></i>
+                <!-- ?message sent -->
+                <div class="sent">
+                    <div class="flex">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
+                        <!-- ?chev dropdown -->
+                        <div class="chev">
+                            <label for="options">
+                                <i class="fa-solid fa-chevron-down" id="options"></i>
+                                <ul class="chev-list">
+                                    <li>
+                                        <button>Info messaggio</button>
+                                    </li>
+                                    <li>
+                                        <button>Cancella messaggio</button>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="message-time opacity05">
+                        16.13
+                    </div>
                 </div>
-                <input class="new-message-inputs" placeholder="Scrivi un messaggio">
-                <div class="right-footer-icon">
-                    <i class="fa fa-microphone" aria-hidden="true"></i>
+                <!-- ?message received -->
+                <div class="received">
+                    <div class="flex">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
+                        <!-- ?chev dropdown -->
+                        <div class="chev">
+                            <label for="options">
+                                <i class="fa-solid fa-chevron-down" id="options"></i>
+                                <ul class="chev-list">
+                                    <li>
+                                        <button>Info messaggio</button>
+                                    </li>
+                                    <li>
+                                        <button>Cancella messaggio</button>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="message-time opacity05">
+                        16.15
+                    </div>
                 </div>
-            </div>
-        </div>
-        <!-- /contenitore dx -->
+                <!-- ?message sent -->
+                <div class="sent">
+                    <div class="flex">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
+                        <!-- ?chev dropdown -->
+                        <div class="chev">
+                            <label for="options">
+                                <i class="fa-solid fa-chevron-down" id="options"></i>
+                                <ul class="chev-list">
+                                    <li>
+                                        <button>Info messaggio</button>
+                                    </li>
+                                    <li>
+                                        <button>Cancella messaggio</button>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="message-time opacity05">
+                        16.13
+                    </div>
+                </div>
+                <!-- ?message received -->
+                <div class="received">
+                    <div class="flex">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p>
+                        <!-- ?chev dropdown -->
+                        <div class="chev">
+                            <label for="options">
+                                <i class="fa-solid fa-chevron-down" id="options"></i>
+                                <ul class="chev-list">
+                                    <li>
+                                        <button>Info messaggio</button>
+                                    </li>
+                                    <li>
+                                        <button>Cancella messaggio</button>
+                                    </li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="message-time opacity05">
+                        16.15
+                    </div>
+                </div>
+            </section>
+            <!-- /LAST MESSAGES -->
+
+            <!-- *INPUT SECTION -->
+            <section class="input-message">
+                <form action="" class="flex">
+                    <button class="emoji"><i class="fa-regular fa-face-smile"></i></button>
+                    <input type="text" placeholder="Scrivi un messaggio" aria-label="write a message">
+                    <button class="vocal-note"><i class="fa-solid fa-microphone"></i></button>
+                </form>
+            </section>
+            <!-- /INPUT SECTION -->
+
+        </main>
+        <!-- /CHAT COL -->
+
     </div>
     <!-- script -->
     <script src="./js/script.js"></script>
-
 </body>
 </html>

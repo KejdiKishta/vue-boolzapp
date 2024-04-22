@@ -1,0 +1,52 @@
+/* Desktop-First approach */
+
+@media screen and (max-width: 768px) {
+    .nav-header-icons,
+    .notification,
+    .research,
+    .card-name,
+    .card-time {
+        display: none;
+    }
+
+    nav {
+        width: 50px;
+    }
+
+    main {
+        width: calc(100% - 50px);
+    }
+
+    .chats-history {
+        height: calc(100% - var(--fifty-height));
+    }
+
+    .container {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        margin: 0;
+    }
+
+    .messages {
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    nav,
+    .nav-header-icons,
+    .emoji,
+    .vocal-note,
+    .main-header-icons {
+        display: none;
+    }
+
+    .messages {
+        padding: 10px;
+    }
+
+    main {
+        width: 100%;
+    }
+}
