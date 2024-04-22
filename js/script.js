@@ -167,8 +167,30 @@ return {
     },
     ],
 
+    newMessage: {
+        date: "",
+        message: "",
+        status: "sent",
+    },
+
     activeIndex: 0,
 };
 },
-methods: {},
+methods: {
+    sendMessage: function() {
+        const newMessageCopy = {...this.newMessage};
+
+        this.contacts[this.activeIndex].messages.push(newMessageCopy);
+        this.newMessage.message = "";
+
+        setTimeout(() => {
+            const answer = {
+                date: "",
+                message: "ok",
+                status: "received",
+            };
+            this.contacts[this.activeIndex].messages.push(answer);
+        }, 1000);
+    }
+},
 }).mount("#app");

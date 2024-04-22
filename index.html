@@ -90,13 +90,13 @@
         <main>
 
             <!-- *CONTACT DETAILS -->
-            <header class="flex">
+            <header class="flex" v-for="(contact, index) in contacts" v-show="index === activeIndex">
                 <!-- ?info -->
                 <div>
-                    <img src="./img/avatar_1.jpg" alt="">
+                    <img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name">
                 </div>
                 <div class="main-chat-name">
-                    <h4>Michele</h4>
+                    <h4>{{ contact.name }}</h4>
                     <p>Ultimo accesso oggi alle 16:26</p>
                 </div>
                 <!-- ?buttons -->
@@ -139,37 +139,14 @@
                         16.13
                     </div>
                 </div>
-                <!-- ?message received -->
-                <!-- <div class="received">
-                    <div class="flex">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum temporibus sint voluptates aut quo magni consectetur sequi itaque maxime omnis, obcaecati quaerat eos molestias rerum inventore laboriosam dicta nemo? Ipsum!</p> -->
-                        <!-- ?chev dropdown -->
-                        <!-- <div class="chev">
-                            <label for="options">
-                                <i class="fa-solid fa-chevron-down" id="options"></i>
-                                <ul class="chev-list">
-                                    <li>
-                                        <button>Info messaggio</button>
-                                    </li>
-                                    <li>
-                                        <button>Cancella messaggio</button>
-                                    </li>
-                                </ul>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="message-time opacity05">
-                        16.15
-                    </div>
-                </div> -->
             </section>
             <!-- /LAST MESSAGES -->
 
             <!-- *INPUT SECTION -->
             <section class="input-message">
-                <form action="" class="flex">
+                <form action="" class="flex" @submit.prevent>
                     <button class="emoji"><i class="fa-regular fa-face-smile"></i></button>
-                    <input type="text" placeholder="Scrivi un messaggio" aria-label="write a message">
+                    <input type="text" placeholder="Scrivi un messaggio" aria-label="write a message" v-model="newMessage.message" @keyup.enter="sendMessage">
                     <button class="vocal-note"><i class="fa-solid fa-microphone"></i></button>
                 </form>
             </section>
