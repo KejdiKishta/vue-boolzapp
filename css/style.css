@@ -223,6 +223,26 @@ main header div:first-child {
     align-items: center;
     gap: 20px;
     padding: 0 10px;
+    position: relative;
+}
+
+.ellipsis-list {
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    top: 25px;
+    right: 5px;
+    width: 120px;
+    z-index: 1;
+}
+
+.ellipsis-list li {
+    padding: 5px;
+    text-align: center;
+}
+
+.ellipsis-list button {
+    font-size: .5rem;
 }
 
 /* *LAST MESSAGES */

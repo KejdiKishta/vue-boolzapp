@@ -107,7 +107,7 @@
             <!-- *CONTACT DETAILS -->
             <!-- v-for iterazioni per ogni oggetto di contacts -->
             <!-- v-show l'avatar corrispondente all'indice del contatto attivo -->
-            <header class="flex" v-for="(contact, index) in contacts" v-show="index === activeIndex">
+            <header class="flex p-relative" v-for="(contact, index) in contacts" v-show="index === activeIndex">
                 <!-- ?info -->
                 <div>
                     <img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name">
@@ -127,7 +127,16 @@
                         <button><i class="fa-solid fa-paperclip"></i></button>
                     </li>
                     <li>
-                        <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        <button @click="toggleDropdown = !toggleDropdown"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        <ul class="ellipsis-list" v-show="toggleDropdown === true">
+                            <li>
+                                <button @click="removeAllMex()">Ripulisci chat</button>
+                            </li>
+                            <li>
+                                <!-- con delete message prendo il messaggio corrente elo elimino con splice -->
+                                <button @click="removeContact(index)">Elimina Contatto</button>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </header>
