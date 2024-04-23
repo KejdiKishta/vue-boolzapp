@@ -1,4 +1,6 @@
 const { createApp } = Vue;
+const dt = luxon.DateTime;
+// const now = dt.now();
 
 createApp({
 data() {
@@ -8,6 +10,7 @@ return {
         name: "Michele",
         avatar: "_1",
         visible: true,
+        lastAccess: "10.20",
         messages: [
         {
             date: "10/01/2020 15:30:55",
@@ -30,6 +33,7 @@ return {
         name: "Fabio",
         avatar: "_2",
         visible: true,
+        lastAccess: "10.20",
         messages: [
         {
             date: "20/03/2020 16:30:00",
@@ -52,6 +56,7 @@ return {
         name: "Samuele",
         avatar: "_3",
         visible: true,
+        lastAccess: "10.20",
         messages: [
         {
             date: "28/03/2020 10:10:40",
@@ -74,6 +79,7 @@ return {
         name: "Alessandro B.",
         avatar: "_4",
         visible: true,
+        lastAccess: "10.20",
         messages: [
         {
             date: "10/01/2020 15:30:55",
@@ -91,6 +97,7 @@ return {
         name: "Alessandro L.",
         avatar: "_5",
         visible: true,
+        lastAccess: "10.20",
         messages: [
         {
             date: "10/01/2020 15:30:55",
@@ -108,6 +115,7 @@ return {
         name: "Claudia",
         avatar: "_6",
         visible: true,
+        lastAccess: "10.20",
         messages: [
         {
             date: "10/01/2020 15:30:55",
@@ -130,6 +138,7 @@ return {
         name: "Federico",
         avatar: "_7",
         visible: true,
+        lastAccess: "10.20",
         messages: [
         {
             date: "10/01/2020 15:30:55",
@@ -147,6 +156,7 @@ return {
         name: "Davide",
         avatar: "_8",
         visible: true,
+        lastAccess: "10.20",
         messages: [
         {
             date: "10/01/2020 15:30:55",
@@ -167,6 +177,19 @@ return {
     },
     ],
 
+    risposteCasuali: [
+        "Sì, esattamente!",
+        "No, assolutamente non sono d'accordo.",
+        "Hmm, interessante punto di vista!",
+        "Non ne sono sicuro, che ne pensi tu?",
+        "Wow, non ci avevo mai pensato in quel modo!",
+        "Mi piacerebbe approfondire questa discussione!",
+        "Potrebbe essere, dipende dalle circostanze.",
+        "Ah, è possibile, ma non ne sono convinto al 100%.",
+        "Guardiamola da un'altra prospettiva.",
+        "Non ho idea di cosa stia succedendo, ma suona divertente!"
+    ],
+
     newMessage: {
         date: "",
         message: "",
@@ -175,26 +198,38 @@ return {
 
     chatSearch: "",
     activeIndex: 0,
+    
+    isTyping: false,
+    online: false,
 };
 },
 methods: {
     sendMessage: function() {
         const newMessageCopy = {...this.newMessage};
+        newMessageCopy.date = dt.now().toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS);
         const newMessageCopyTrimmed = newMessageCopy.message.trim()
         console.log(newMessageCopyTrimmed);
 
         if (newMessageCopyTrimmed !== "") {
             this.contacts[this.activeIndex].messages.push(newMessageCopy);
             this.newMessage.message = "";
+            this.isTyping = true;
     
             setTimeout(() => {
-                const answer = {
-                    date: "",
-                    message: "ok",
+                let answer = {
+                    date: dt.now().toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS),
+                    message: this.risposteCasuali[Math.floor(Math.random() * this.risposteCasuali.length)],
                     status: "received",
                 };
                 this.contacts[this.activeIndex].messages.push(answer);
-            }, 1000);
+                this.isTyping = false;
+                this.online = true;
+            }, 2000);
+
+            setTimeout(() => {
+                this.online = false;
+                this.contacts[this.activeIndex].lastAccess = dt.now().toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS);
+            }, 5000);
         }
     },
     search: function() {
@@ -223,9 +258,9 @@ methods: {
 //*fatto
 // evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
 // A) cambiare icona in basso a destra (a fianco all'input per scrivere un nuovo messaggio) finché l'utente sta scrivendo: di default si visualizza l'icona del microfono, quando l'input non è vuoto si visualizza l'icona dell'aeroplano. Quando il messaggio è stato inviato e l'input si svuota, si torna a visualizzare il microfono.
-//*da fare
-//        B) inviare quindi il messaggio anche cliccando sull'icona dell'aeroplano
+// B) inviare quindi il messaggio anche cliccando sull'icona dell'aeroplano
 // predisporre una lista di frasi e/o citazioni da utilizzare al posto della risposta "ok:" quando il pc risponde, anziché scrivere "ok", scegliere una frase random dalla lista e utilizzarla come testo del messaggio di risposta del pc
 // sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello stato: visualizzare il testo "sta scrivendo..." nel timeout in cui il pc risponde, poi mantenere la scritta "online" per un paio di secondi e infine visualizzare "ultimo accesso alle xx:yy" con l'orario corretto
+//*da fare
 // dare la possibilità all'utente di cancellare tutti i messaggi di un contatto o di cancellare l'intera chat con tutti i suoi dati: cliccando sull'icona con i tre pallini in alto a destra, si apre un dropdown menu in cui sono presenti le voci "Elimina messaggi" ed "Elimina chat"; cliccando su di essi si cancellano rispettivamente tutti i messaggi di quel contatto (quindi rimane la conversazione vuota) oppure l'intera chat comprensiva di tutti i dati del contatto oltre che tutti i suoi messaggi (quindi sparisce il contatto anche dalla lista di sinistra)
 // dare la possibilità all'utente di aggiungere una nuova conversazione, inserendo in un popup il nome e il link all'icona del nuovo contatto

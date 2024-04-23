@@ -88,11 +88,11 @@
                     @click="activeIndex = index"
                     v-show="contact.visible">
                     <div class="card-img"><img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name"></div>
-                    <div class="card-name ">
-                        <h4>{{ contact.name }}</h4>
-                        <p class="c-g"> {{ lastMex(index) }} </p>
-                    </div>
-                    <div class="card-time c-g"> {{ lastTime(index) }} </div>
+                        <div class="card-name ">
+                            <h4>{{ contact.name }}</h4>
+                            <p class="c-g"> {{ lastMex(index) }} </p>
+                        </div>
+                        <div class="card-time c-g"> {{ lastTime(index) }} </div>
                     </li>
                 </ul>               
             </section>
@@ -114,7 +114,9 @@
                 </div>
                 <div class="main-chat-name">
                     <h4>{{ contact.name }}</h4>
-                    <p>Ultimo accesso oggi alle 16:26</p>
+                    <p v-if="isTyping === true">Sta scrivendo...</p>
+                    <p v-else-if="online === true">online</p>
+                    <p v-else>Ultimo accesso oggi alle {{ contact.lastAccess }}</p>
                 </div>
                 <!-- ?buttons -->
                 <ul class="main-header-icons c-g flex">
@@ -186,6 +188,8 @@
         <!-- /CHAT COL -->
 
     </div>
+    <!-- luxon -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js" integrity="sha512-dUlSLLkxslGILhPdCkALwk4szPhp3xmZIKFtlUD+O9Lslq41Aksmdt5OGqpomDoT4FsCUH70jQU8ezZHI3v1RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- script -->
     <script src="./js/script.js"></script>
 </body>
