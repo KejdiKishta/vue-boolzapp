@@ -167,7 +167,7 @@
             <section class="input-message">
                 <!-- submit.prevent impedisce al form di ricaricare la pagina al click del bottone -->
                 <form action="" class="flex" @submit.prevent>
-                    <button class="emoji"><i class="fa-regular fa-face-smile"></i></button>
+                    <button class="input-icons"><i class="fa-regular fa-face-smile"></i></button>
                     <!-- v-model salva i digits su una variabile -->
                     <!-- quando premo enter con la funzione send messagecopio il messaggio in una costante e lo pusho nell'array del contatto attivo -->
                     <input
@@ -176,7 +176,8 @@
                     aria-label="write a message"
                     v-model="newMessage.message"
                     @keyup.enter="sendMessage">
-                    <button class="vocal-note"><i class="fa-solid fa-microphone"></i></button>
+                    <button class="input-icons" v-if="newMessage.message === ''"><i class="fa-solid fa-microphone"></i></button>
+                    <button class="input-icons" @click="sendMessage" v-else><i class="fa-solid fa-paper-plane"></i></button>
                 </form>
             </section>
             <!-- /INPUT SECTION -->

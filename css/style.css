@@ -314,7 +314,7 @@ section.messages .flex {
     padding: 0 10px;
 }
 
-.emoji, .vocal-note {
+.input-icons {
     width: 30px;
     flex-shrink: 0;
     color: #6B7376;
