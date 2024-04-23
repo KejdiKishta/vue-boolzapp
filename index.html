@@ -62,7 +62,15 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </label>
                 <div class="search-input">
-                    <input id="new-chat" type="text" placeholder="Cerca o inizia una nuova chat" aria-label="search or start new chat" v-model="chatSearch" @keyup.enter="search">
+                    <!-- v-model per collegarlo al data -->
+                    <!-- keyup per chiamare la funzione quando premo invio -->
+                    <input 
+                    id="new-chat"
+                    type="text"
+                    placeholder="Cerca o inizia una nuova chat"
+                    aria-label="search or start new chat"
+                    v-model="chatSearch"
+                    @keyup.enter="search">
                 </div>
             </section>
             <!-- /RESEARCH SECTION -->
@@ -71,13 +79,20 @@
             <section class="chats-history">
                 <ul>
                     <!-- ?CARD -->
-                    <li class="card flex" v-for="(contact, index) in contacts" @click="activeIndex = index" v-show="contact.visible">
+                    <!-- v-for per iterare tutti gli oggetti di contacts -->
+                    <!-- al click indice delle chat corrisponde all'indice del contatto -->
+                    <!-- v-show gestisce se mostrare il contatto dopo aver inserito qualcosa nella barra di ricerca dei contatti -->
+                    <li
+                    class="card flex"
+                    v-for="(contact, index) in contacts"
+                    @click="activeIndex = index"
+                    v-show="contact.visible">
                     <div class="card-img"><img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name"></div>
                     <div class="card-name ">
                         <h4>{{ contact.name }}</h4>
-                        <p class="c-g">Lorem ipsum dolor sit amet</p>
+                        <p class="c-g"> {{ lastMex(index) }} </p>
                     </div>
-                    <div class="card-time c-g">16:15</div>
+                    <div class="card-time c-g"> {{ lastTime(index) }} </div>
                     </li>
                 </ul>               
             </section>
@@ -90,6 +105,8 @@
         <main>
 
             <!-- *CONTACT DETAILS -->
+            <!-- v-for iterazioni per ogni oggetto di contacts -->
+            <!-- v-show l'avatar corrispondente all'indice del contatto attivo -->
             <header class="flex" v-for="(contact, index) in contacts" v-show="index === activeIndex">
                 <!-- ?info -->
                 <div>
@@ -115,9 +132,12 @@
             <!-- /CONTACT DETAILS -->
 
             <!-- *LAST MESSAGES -->
+            <!-- v-for iterazioni per ogni oggetto di contacts -->
+            <!-- v-show la chat corrispondente all'indice del contatto attivo -->
             <section v-for="(contact, index) in contacts" class="messages flex" v-show="index === activeIndex">
                 <!-- ?message sent -->
-                <div v-for="message in contact.messages" :class="message.status">
+                <!-- v-for per ogni oggetto vado ad iterare tutti i messaggi dentro all'array messages -->
+                <div v-for="(message, index) in contact.messages" :class="message.status">
                     <div class="flex">
                         <p> {{ message.message }} </p>
                         <!-- ?chev dropdown -->
@@ -129,14 +149,15 @@
                                         <button>Info messaggio</button>
                                     </li>
                                     <li>
-                                        <button>Cancella messaggio</button>
+                                        <!-- con delete message prendo il messaggio corrente elo elimino con splice -->
+                                        <button @click="deleteMex(index)">Cancella messaggio</button>
                                     </li>
                                 </ul>
                             </label>
                         </div>
                     </div>
                     <div class="message-time opacity05">
-                        16.13
+                        {{ message.date }}
                     </div>
                 </div>
             </section>
@@ -144,9 +165,17 @@
 
             <!-- *INPUT SECTION -->
             <section class="input-message">
+                <!-- submit.prevent impedisce al form di ricaricare la pagina al click del bottone -->
                 <form action="" class="flex" @submit.prevent>
                     <button class="emoji"><i class="fa-regular fa-face-smile"></i></button>
-                    <input type="text" placeholder="Scrivi un messaggio" aria-label="write a message" v-model="newMessage.message" @keyup.enter="sendMessage">
+                    <!-- v-model salva i digits su una variabile -->
+                    <!-- quando premo enter con la funzione send messagecopio il messaggio in una costante e lo pusho nell'array del contatto attivo -->
+                    <input
+                    type="text"
+                    placeholder="Scrivi un messaggio"
+                    aria-label="write a message"
+                    v-model="newMessage.message"
+                    @keyup.enter="sendMessage">
                     <button class="vocal-note"><i class="fa-solid fa-microphone"></i></button>
                 </form>
             </section>

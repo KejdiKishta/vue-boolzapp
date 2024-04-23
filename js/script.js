@@ -202,6 +202,15 @@ methods: {
             //con inludes restituisco a visible true o false
             contact.visible = contact.name.toLowerCase().includes(searchQuery);
         });
-    }
+    },
+    deleteMex: function (index) {
+        this.contacts[this.activeIndex].messages.splice(index, 1)
+    },
+    lastMex: function (index) {
+        return this.contacts[index].messages[this.contacts[index].messages.length - 1].message;
+    },
+    lastTime: function (index) {
+        return this.contacts[index].messages[this.contacts[index].messages.length - 1].date;
+    },
 },
 }).mount("#app");
