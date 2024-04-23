@@ -62,7 +62,7 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </label>
                 <div class="search-input">
-                    <input id="new-chat" type="text" placeholder="Cerca o inizia una nuova chat" aria-label="search or start new chat">
+                    <input id="new-chat" type="text" placeholder="Cerca o inizia una nuova chat" aria-label="search or start new chat" v-model="chatSearch" @keyup.enter="search">
                 </div>
             </section>
             <!-- /RESEARCH SECTION -->
@@ -71,8 +71,8 @@
             <section class="chats-history">
                 <ul>
                     <!-- ?CARD -->
-                    <li class="card flex" v-for="(contact, index) in contacts" @click="activeIndex = index">
-                    <div class="card-img"><img :src="`./img/avatar${contact.avatar}.jpg`" alt="contact.name"></div>
+                    <li class="card flex" v-for="(contact, index) in contacts" @click="activeIndex = index" v-show="contact.visible">
+                    <div class="card-img"><img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name"></div>
                     <div class="card-name ">
                         <h4>{{ contact.name }}</h4>
                         <p class="c-g">Lorem ipsum dolor sit amet</p>

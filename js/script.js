@@ -173,6 +173,7 @@ return {
         status: "sent",
     },
 
+    chatSearch: "",
     activeIndex: 0,
 };
 },
@@ -191,6 +192,16 @@ methods: {
             };
             this.contacts[this.activeIndex].messages.push(answer);
         }, 1000);
+    },
+    search: function() {
+        // porto tutto in minuscolo per confrontare
+        const searchQuery = this.chatSearch.toLowerCase();
+
+        this.contacts.forEach(contact => {
+            // anche name in minuscolo
+            //con inludes restituisco a visible true o false
+            contact.visible = contact.name.toLowerCase().includes(searchQuery);
+        });
     }
 },
 }).mount("#app");
