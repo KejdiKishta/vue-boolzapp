@@ -38,7 +38,7 @@
                         <button><i class="fa-solid fa-message"></i></button>
                     </li>
                     <li>
-                        <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        <button><i class="fa-solid fa-plus" @click="addContact = !addContact"></i></button>
                     </li> 
                 </ul>
             </header>
@@ -101,8 +101,36 @@
         </nav>
         <!-- /CONTACTS COL -->
 
+        <!-- !ADD CONTACT -->
+        <div v-if="addContact" id="add-contact">
+            <form action="" class="form" @submit.prevent>
+                <p class="title">Nuova Chat</p>
+                <div class="flex">
+                    <label>
+                        <input required="" placeholder="" type="text" class="input" v-model="newContact.name">
+                        <span>Nome</span>
+                    </label>
+            
+                    <label>
+                        <input required="" placeholder="" type="text" class="input">
+                        <span>Cognome</span>
+                    </label>
+                </div>  
+                        
+                <label>
+                    <input placeholder="" type="text" class="input">
+                    <span>Nickname</span>
+                </label> 
+                    
+                <label>
+                    <input required="" placeholder="" type="tel" class="input">
+                    <span>Numero di telefono</span>
+                </label>
+                <button class="submit" @click="createChat">Aggiungi Contatto</button>
+            </form>
+        </div>
         <!-- !CHAT COL -->
-        <main>
+        <main v-else>
 
             <!-- *CONTACT DETAILS -->
             <!-- v-for iterazioni per ogni oggetto di contacts -->
@@ -116,7 +144,7 @@
                     <h4>{{ contact.name }}</h4>
                     <p v-if="isTyping === true">Sta scrivendo...</p>
                     <p v-else-if="online === true">online</p>
-                    <p v-else>Ultimo accesso oggi alle {{ contact.lastAccess }}</p>
+                    <p v-else>Ultimo accesso il {{ contact.lastAccess }}</p>
                 </div>
                 <!-- ?buttons -->
                 <ul class="main-header-icons c-g flex">
@@ -175,7 +203,7 @@
             <!-- /LAST MESSAGES -->
 
             <!-- *INPUT SECTION -->
-            <section class="input-message">
+            <section class="input-message" v-show="contacts.length > 0">
                 <!-- submit.prevent impedisce al form di ricaricare la pagina al click del bottone -->
                 <form action="" class="flex" @submit.prevent>
                     <button class="input-icons"><i class="fa-regular fa-face-smile"></i></button>
